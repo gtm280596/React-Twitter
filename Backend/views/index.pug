@@ -1,0 +1,17 @@
+extends ./layouts/main.pug
+
+block content
+  .menu
+    ul.nav.nav-tabs
+      li
+        #iconforlogin.glyphicon.glyphicon-heart
+
+    .inner.cover
+      h1.cover-heading Twitter-clone
+      p.lead
+       | No matter your position, proper twitter clone  makes your conversation easier.
+      button.btn-primary
+        a#login(href="/registration") Sign-up
+      | &nbsp &nbsp
+      button.btn-primary
+        a#login(href="/login") Sign-in
