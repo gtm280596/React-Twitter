@@ -14,7 +14,7 @@ class Index extends Component{
             <h1 className="cover-heading">Twitter-clone</h1>
             <p className="lead">No matter your position, proper twitter clone  makes your conversation easier.</p>
             <button className="btn-primary"><a id="login" href="/registration">SignUp</a></button>&nbsp &nbsp
-            <button className="btn-primary"><a id="login" href="/login">log In</a></button>
+            <button className="btn-primary"><a id="login" href="/login">LogIn</a></button>
           </div>
         </div>
       </div>

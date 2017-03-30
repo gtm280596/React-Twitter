@@ -38,7 +38,7 @@ class login extends Component{
     })
     .then(function (response) {
       console.log(response);
-      alert(response);
+      // alert(response);
       // return false;
       if (response.data.id) {
         cookie.save('user_id', response.data.id);
@@ -52,9 +52,6 @@ class login extends Component{
     });
 
     e.preventDefault();
-    // this.setState({
-    //   showComponent: true,
-    // });
   }
   render() {
     const style = {
@@ -67,7 +64,8 @@ class login extends Component{
           <div className="menu">
             <ul className="nav nav-tabs">
               <li>
-                <div id="iconforlogin" className="glyphicon glyphicon-user"><span>Registration</span></div>
+                <div id="iconforlogin" className="glyphicon glyphicon-user">
+                </div>
               </li>
             </ul>
           </div>
@@ -78,7 +76,8 @@ class login extends Component{
                 <div className="form-top-left">
                   <h3>Login Community</h3>
                 </div>
-                <div className="form-top-right"><i className="fa fa-key fa-4x"></i></div>
+                <div className="form-top-right">
+                <i className="fa fa-key fa-4x"></i></div>
               </div>
 
               <div className="form-bottom">
@@ -87,23 +86,29 @@ class login extends Component{
                     <label htmlFor="form-username" className="sr-only">Email</label>
                     <input value={this.state.username}
                     onChange={this.onChange}
-                    type="text" name="email" placeholder="Email..." required="" className="form-control"/>
+                    type="text"
+                    name="email"
+                    placeholder="Email..." required className="form-control"/>
                   </div>
 
                   <div className="form-group">
                     <label htmlFor="form-password" className="sr-only">Password</label>
                     <input value={this.state.username}
                     onChange={this.onChange}
-                    type="password" name="password" placeholder="Password..." required="" className="form-password form-control"/>
+                    type="password"
+                    name="password"
+                    placeholder="Password..."
+                    required
+                    className="form-password form-control"/>
                   </div>
 
                   <div className="form-group">
                     <button type="submit" className="btn">Sign in !</button>
-                    <input type="checkbox" checked="checked" name="Remember_me" value="Remember_me" required=""/>
-                    <label>Remember me</label><a href="/forgot" style={style}><br/>Forgot Password..??</a>
+                    <input type="checkbox" checked="checked" name="Remember_me" value="Remember_me" required/>
+                    <label>Remember me</label>
                   </div>
                   <div className="form-group">
-                    <label>New User </label><a href="/registration" style={style}> Sign Up Now..??</a>
+                    <label><h2>New user</h2></label><br/><a href="/registration" className="btn"> Sign Up Now..??</a>
                   </div>
                 </form>
               </div>

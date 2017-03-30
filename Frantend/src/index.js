@@ -12,6 +12,8 @@ import Profile from './Components/profile';
 import Twit from './Components/twit';
 import Follow from './Components/follow';
 import Unfollow from './Components/unfollow';
+import Logout from './Components/logout';
+
 
 ReactDOM.render(
   (
@@ -24,6 +26,8 @@ ReactDOM.render(
       <Route path="/twit" component={Twit} />
       <Route path="/follow/:id" component={Follow} />
       <Route path="/unfollow/:id" component={Unfollow} />
+      <Route path="/logout" component={Logout} />
+
  </Router>
 ), document.getElementById('app'));
 

@@ -9,15 +9,10 @@ class home extends Component{
     this.state={
       data:'',
       user_id: cookie.load('user_id')
-      // user_id: ''
     }
-    // this.onFieldChange = this.onFieldChange.bind(this);
-    // this.handleTweet = this.handleTweet.bind(this);
   }
   componentWillMount() {
     let user_id = this.props.params.id;
-    // this.setState({user_id: cookie.load('user_id')});
-
     axios.get(`http://localhost:8000/home/${user_id}`)
     .then(res => {
       const data= res.data;
@@ -27,32 +22,8 @@ class home extends Component{
       })
     });
   }
-  // onfollow(id) {
-  //   axios.post('http://localhost:8000/follower', {
-  //     data : this.state,
-  //     follower_id: id,
-  //   })
-  //   .then(function (response) {
-  //     if(response.data.user_id) {
-  //       location.reload();
-  //       browserHistory.push("/home/" + response.data.user_id)
-  //     }
-  //   })
-  //   .catch(function (error) {
-  //   });
-  // }
-
-  // onfollowerCLick(e){
-  //   let user_id = this.props.params.id
-  //     if(user_id)
-  //       browserHistory.push("/followers/" +user_id)
-  //     else
-  //       browserHistory.push("/login")
-  //   e.preventDefault(e);
-  // }
 
   render() {
-
     let user_id = this.state.user_id;
     var tweet = [];
      if(this.state.data.twits) {
@@ -61,13 +32,12 @@ class home extends Component{
         let t = new Date(a);
         var tweettime = t.getDate() + "/" + (t.getMonth() + 1) +"/"+ t.getFullYear() + ' ' + t.getHours() + ":" + t.getMinutes() + ":" + t.getSeconds();
         if(this.state.data.twits[i].username) {
-          // console.log(this.state.data.twits[i].username,"=======username")
+          console.log(this.state.data.twits[i].username,"=======username")
           tweet.push(
             <div key={i} className="row">
             <div  className="form-box">
               <div  className="form-top">
                 <div  className="form-left">
-
                   <h3>{this.state.data.twits[i].username}<a/>
                   <div className="form-right">
                   {tweettime} </div></h3><hr />
@@ -102,18 +72,18 @@ class home extends Component{
     if(this.state.data.follows) {
        for ( i = 0; i < this.state.data.follows.length ; i++) {
         let followerid = this.state.data.follows[i].user_id;
+        let loginuserimgsrc = `http://localhost:8000/images/${this.state.data.users.image}`;
         let followsrc = `/follow/${followerid}`;
         if(this.state.data.follows) {
           follower.push(
 
             <div key={i} className="profile-sidebar">
               <div className="profile-userpic">
-              <img src={require('../../public/images/image1.jpeg')}
+              <img src={loginuserimgsrc}
               alt="userpic" className="img-responsive"/>&#x9;&#x9;&#x9;&#x9;&#x9;
-              <a href="/userprofile/">
-              {this.state.data.follows[i].username}</a>
                 <div className="profile-usertitle"></div>
-                <div className="profile-usertitle-name"></div>&#x9;&#x9;&#x9;&#x9;&#x9;
+                <div className="profile-usertitle-name">
+                {this.state.data.follows[i].username}</div>&#x9;&#x9;&#x9;&#x9;&#x9;
               </div>
               <form >
                 <div className="profile-userbuttons">
@@ -137,7 +107,6 @@ class home extends Component{
       username = this.state.data.users.username;
     }
 
-
     let profilesrc = `/profile/${user_id}`;
     let homesrc = `/home/${user_id}`;
     return(
@@ -156,7 +125,7 @@ class home extends Component{
 
             <li id="icon">
               <form method="get">
-                <button type="submit" className="btn btn-primary">Logout</button>&nbsp &nbsp
+                <button type="submit" className="btn btn-primary"><a href="/logout">Logout</a></button>&nbsp &nbsp
               </form>
             </li>
           </ul>

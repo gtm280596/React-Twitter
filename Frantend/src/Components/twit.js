@@ -7,45 +7,36 @@ class twit extends Component{
   constructor(props) {
     super(props);
     this.state = {
-      tweetText:'',
-      user_id:cookie.load('user_id'),
+      twit:'',
+      user_id: '',
     }
     this.onFieldChange = this.onFieldChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
   handleSubmit(e){
-    console.log(this.state);
+
+    let user_id = cookie.load('user_id');
+    console.log('-------', user_id);
     axios.post(`http://localhost:8000/twit`, {
-      userdata: this.state,
+      data: this.state,
+      user_id: user_id,
+    })
+    .then( (response) => {
+      browserHistory.push(`/home/${cookie.load('user_id')}`)
     })
 
-    .then( (response) => {
-      console.log(response,"hasghio");
-      location.reload();
-      browserHistory.push("/home/" + response)
-    })
-    .catch(function (error) {
-    });
-    alert('your tweets is done: '+ this.state);
-    e.preventDefault(e);
+    .catch( (error) => {
+     });
+    console.log(this.state);
+      alert('your tweets is done: '+ this.state);
+      e.preventDefault(e);
+
   }
 
   onFieldChange(event){
     console.log(event);
     this.setState({
       [ event.target.name]: event.target.value
-    });
-  }
-  componentWillMount() {
-    let user_id = this.props.params.id;
-    axios.get(`http://localhost:8000/twit/${cookie.load(user_id)}`)
-    .then(res => {
-      const data= res.data;
-      this.setState({
-        tweetText:'',
-        user_id:'',
-        // user_id: cookie.load('user_id')
-      })
     });
   }
   render() {
@@ -86,7 +77,7 @@ class twit extends Component{
                     <input value={this.state.twit}
                       onChange={this.onFieldChange}
                       type="text"
-                      name="tweetText"
+                      name="twit"
                       maxLength="140"
                       placeholder="Add your tweet...!!"
                       className="form-control"/>
@@ -94,6 +85,7 @@ class twit extends Component{
 
                   <div className="form-group">
                     <button type="submit"
+                    value="submit"
                     className="btn">Tweet !!</button>
                   </div>
                 </form>

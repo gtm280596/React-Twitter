@@ -1,15 +1,4 @@
-/*
- * Globals
- */
 
-/* Links */
-/*a,
-a:focus,
-a:hover {
-  color: #fff;
-}*/
-
-/* Custom default button */
 
 #login{
   color: #ffffff;
@@ -25,6 +14,13 @@ a:hover {
   text-shadow: none; /* Prevent inheritance from `body` */
   background-color: #fff;
   border: 1px solid #fff;
+}
+.btn-primary a{
+  text-decoration: none;
+}
+
+.form-group a{
+  text-decoration: none;
 }
 
 

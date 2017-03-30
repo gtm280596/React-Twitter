@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import { browserHistory } from 'react-router';
 class registration extends Component{
 
   constructor(props) {
@@ -18,14 +19,19 @@ class registration extends Component{
   axios.post('http://localhost:8000/registration', {
     userdata: this.state,
   })
-
-  .then(function (response) {
+  .then((response) =>{
     console.log(response);
+
+    if (response.data) {
+      browserHistory.push("/login/")
+    } else {
+        browserHistory.push("/registration")
+    }
   })
-  .catch(function (error) {
+  .catch( (error) => {
     console.log(error);
   });
-    alert('A name was submitted: '+ this.state);
+
     e.preventDefault(e);
   }
 
@@ -37,11 +43,6 @@ class registration extends Component{
   }
 
   render(){
-    // const style = {
-    // fontWeight: '900',
-    // textDecoration:'None',
-    // color:'black',
-    // };
     console.log(this.state);
     return(
       <div className="reg">
@@ -73,7 +74,8 @@ class registration extends Component{
                       onChange={this.onFieldChange}
                       type="text" name="username"
                       placeholder="Username..."
-                      required="required" className="form-control" />
+                      required
+                      className="form-control" />
                     </div>
 
                     <div className="form-group">
@@ -82,7 +84,9 @@ class registration extends Component{
                       onChange={this.onFieldChange}
                       type="text"
                       name="email"
-                      placeholder="Email..." required="required" className="form-control" />
+                      placeholder="Email..."
+                      required
+                      className="form-control" />
                     </div>
 
                     <div className="form-group">
@@ -91,7 +95,8 @@ class registration extends Component{
                       onChange={this.onFieldChange}
                       type="password" name="password"
                       placeholder="Password..."
-                      required="required" className="form-control" />
+                      required
+                      className="form-control" />
                     </div>
 
                     <div className="form-group">
@@ -100,7 +105,8 @@ class registration extends Component{
                       <input value={this.state.file}
                       onChange={this.onFieldChange}
                       type="file" name="file"
-                      required="required" className="form-control" />
+                      required
+                      className="form-control" />
                       <label htmlFor="form-image" className="sr-only">image</label>
                     </div>
 
@@ -110,8 +116,8 @@ class registration extends Component{
                     </div>
 
                     <div className="form-group">
-                      <label>Already Account?</label>
-                      <br/><a href="/login">login Now</a>
+                      <label><h2>Already Account?</h2></label>
+                      <br/><a href="/login">Login Now</a>
                     </div>
                   </form>
                 </div>

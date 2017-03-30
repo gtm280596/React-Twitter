@@ -4,20 +4,21 @@ import cookie from 'react-cookie';
 
 class profile extends Component{
   constructor(props) {
-      super(props);
-      this.state={
-        data:'',
-        user_id: cookie.load('user_id')
-      }
-    }
-    componentWillMount() {
-      let user_id = cookie.load('user_id')
-      axios.get(`http://localhost:8000/profile/${user_id}`)
-      .then(res => {
-        const data= res.data;
-        this.setState({
-        data: data,
-        user_id: cookie.load('user_id')
+    super(props);
+    this.state={
+      data:'',
+      user_id: cookie.load('user_id')
+  }
+}
+  componentWillMount() {
+    let user_id = cookie.load('user_id')
+    axios.get(`http://localhost:8000/profile/${user_id}`)
+    .then(res => {
+      const data= res.data;
+      console.log('response data ---> ', data);
+      this.setState({
+      data: data,
+      user_id: cookie.load('user_id')
       })
     });
   }
@@ -27,6 +28,11 @@ class profile extends Component{
 
     let profilesrc = `/profile/${user_id}`;
     let homesrc = `/home/${user_id}`;
+    let userpic = [];
+    if(this.state.data.users) {
+      let userpicsrc = `http://localhost:8000/images/${this.state.data.users[0].image}`;
+      userpic.push(<img src={userpicsrc} alt="profile" height="150px" width="150px"/>);
+    }
 
     var tweet = [];
       if(this.state.data.twits) {
@@ -73,12 +79,9 @@ class profile extends Component{
               {this.state.data.follows[i].username}</div>&#x9;&#x9;&#x9;&#x9;&#x9;
             </div>
           </div>
-
-
              <a href={unfollowsrc} className="btn btn-primary">
                   UnFollow</a>
-
-        </div>
+          </div>
           );
         }
       }
@@ -98,7 +101,8 @@ class profile extends Component{
                 <div className="slider">
                   <div id="carousel-example-generic" data-ride="carousel" className="carousel slide">
                     <div role="listbox" className="carousel-inner">
-                      <div className="item active"><img src="./images/image.jpeg" alt="profile"/></div>
+                      <div className="item active">
+                      {userpic}</div>
                     </div>
                   </div>
                 </div>
@@ -107,20 +111,27 @@ class profile extends Component{
                   <div className="navbar-header">
                     <button type="button" data-toggle="collapse" data-target="#mainNav" className="navbar-toggle collapsed">
                     <span className="sr-only">Toggle navigation</span>
-                    </button><a href="#" className="navbar-brand"></a>
+                    </button>
+
+                    <a href="#" className="navbar-brand">
+                    {userpic}
+                    </a>
                     <span className="site-name">user</span>
                   </div>
                   <div id="mainNav" className="collapse navbar-collapse">
                     <ul className="nav main-menu navbar-nav">
                       <li>
                       <a href={homesrc}>
-                      <i className="fa fa-home"></i> HOME</a></li>
+                      <i className="fa fa-home">
+                      </i> HOME</a></li>
                       <li>
                       <a href="/edit">
-                      <i className="fa fa-user"></i> Edit</a></li>
+                      <i className="fa fa-user">
+                      </i> Edit</a></li>
                       <li>
                       <a href="/logout">
-                      <i className="fa fa-sign-out"></i> Logout</a></li>
+                      <i className="fa fa-sign-out">
+                      </i> Logout</a></li>
                     </ul>
                     <ul className="nav navbar-nav navbar-right">
                       <li>
@@ -133,8 +144,8 @@ class profile extends Component{
                       </i></a></li>
                       <li>
                       <a href="#">
-                      <i className="fa fa-google-plu
-                      s"></i></a></li>
+                      <i className="fa fa-google-plus">
+                      </i></a></li>
                     </ul>
                   </div>
                 </nav>
