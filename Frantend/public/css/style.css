@@ -33,6 +33,14 @@
 .form-box {
  margin-top: 35px;
  color: #23527c ;
+
+}
+.form-box .page-canvas {
+  border-radius: 6px;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  width: auto;
+  max-width: 100%;
+  margin: auto;
 }
 
 .form-top {

@@ -5,12 +5,14 @@ const should = require('should');
 const app = require('../app');
 
 const data ={
-  user_id :11,
-  username: 'abc',
-  mobilenumber: 1234567890,
-  email: 'abc@imp.com',
-  password: 'password',
-  unfollowId: '',
+  userdata : {
+    user_id :11,
+    username: 'abc',
+    mobilenumber: 1234567890,
+    email: 'abc@imp.com',
+    password: 'password',
+    unfollowId: '',
+  }
 }
 
 describe('POST/registration',  () => {

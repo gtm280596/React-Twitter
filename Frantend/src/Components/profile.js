@@ -125,7 +125,7 @@ class profile extends Component{
                       <i className="fa fa-home">
                       </i> HOME</a></li>
                       <li>
-                      <a href="/edit">
+                      <a href="#">
                       <i className="fa fa-user">
                       </i> Edit</a></li>
                       <li>

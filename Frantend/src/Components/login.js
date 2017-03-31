@@ -103,7 +103,7 @@ class login extends Component{
                   </div>
 
                   <div className="form-group">
-                    <button type="submit" className="btn">Sign in !</button>
+                    <button type="submit" className="btn">Login</button>
                     <input type="checkbox" checked="checked" name="Remember_me" value="Remember_me" required/>
                     <label>Remember me</label>
                   </div>

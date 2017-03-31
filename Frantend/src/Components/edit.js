@@ -1,44 +1,62 @@
 import React,{Component} from react;
+import axios from 'axios';
+import cookie from 'react-cookie';
+import { browserHistory } from 'react-router';
 
 class edit extends Component {
   constructor(props) {
     super(props);
     this.state{
+      userdata:'',
       eidtusername:'',
       eidtemail:'',
       eidtpassword:'',
+      editfile:'',
     }
     this.onChange =this.onChange.bind(this);
     this.onSubmit =this.onSubmit.bind(this);
   }
+
+  editprofileapicall() {
+    let coki = cookie.load('user_id');
+    if(coki) {
+    axios.get(`http://localhost:8000/editprofile/${coki}`)
+    .then(res => {
+      const userdata= res.userdata;
+      console.log("-->", res.userdata)
+      console.log("-->", userdata.results.username)
+
+      this.setState({
+        userdata: userdata,
+        username : userdata.results.username,
+        email : userdata.results.email,
+        mobilenumber: userdata.results.mobilenumber,
+      })
+
+    });
+  } else {
+    browserHistory.push('/');
+  }
+  }
+
   onChange(e){
       this.setState({ [e.target.name]: e.target.value})
   }
    onSubmit(e){
-    axios.post('http://localhost:8000/edit', {
+    axios.post(`http://localhost:8000/edit/${cookie.load('user_id')}`, {
       userdata: this.state,
-      user_id:this.user_id
+      user_id: cookie.load('user_id')
     })
-    .then(function (response) {
-      console.log(response);
-      alert(response);
+    .then( (response) => {
+      console.log('Response------>>',response);
       // return false;
-      if (response.data.id) {
-        cookie.save('user_id', response.data.id);
-        browserHistory.push("/home/" + response.data.id)
-      } else {
-        browserHistory.push("/login")
-      }
-    })
-    .catch(function (error) {
+      browserHistory.push(`/home/${cookie.load('user_id')}`)
+      })
+    .catch( (error) => {
       console.log(error);
     });
-
-    e.preventDefault();
-    // this.setState({
-    //   showComponent: true,
-    // });
   }
+
   render() {
     return(
       <div>
@@ -47,8 +65,8 @@ class edit extends Component {
           <div className="row">
             <div className="col-md-3">
               <div className="text-center">
-                <form action="/editprofile" method="post" enctype="multipart/form-data" className="form-horizontal">
-                  <div className="form-group">
+                <form  className="form-horizontal">
+                  <div className="form-group" >
                     <div className="profile-userpic"><img src="images/" className="image-responsive"/>
                       <h6>Upload a different photo...</h6>
                       <input type="file" name="file" required="required" className="form-control"/>

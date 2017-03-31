@@ -78,6 +78,7 @@ router.post('/registration', upload.single('file'), (req, res, next) => {
       // res.redirect('/login');
   });
   // }
+  // res.status(201).send("hello");
 });
 
 router.get('/login', (req, res) => {
@@ -133,7 +134,8 @@ router.post('/login', (req, res, next) => {
       res.send(JSON.stringify(data));
     }
     res.end('/home/');
-    });
+  });
+  // res.status(201).send("hello");
 });
 
 router.get('/home/:id', (req, res, next) => {
@@ -436,7 +438,9 @@ router.get('/logout', (req, res) => {
       res.clearCookie('myCookie');
       res.redirect('/login');
     }
+    res.status(201).send("hello");
   });
+
 });
 
 module.exports = router;

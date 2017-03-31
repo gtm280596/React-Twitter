@@ -35,7 +35,7 @@ class home extends Component{
           console.log(this.state.data.twits[i].username,"=======username")
           tweet.push(
             <div key={i} className="row">
-            <div  className="form-box">
+            <div  className="form-box" className="page-canvas">
               <div  className="form-top">
                 <div  className="form-left">
                   <h3>{this.state.data.twits[i].username}<a/>
@@ -52,7 +52,7 @@ class home extends Component{
         } else {
           tweet.push(
             <div key={i} className="row">
-              <div className="form-box">
+              <div className="form-box" className="page-canvas">
                 <div className="form-top">
                   <div className="form-left">
                     <div  className="form-top-right">
